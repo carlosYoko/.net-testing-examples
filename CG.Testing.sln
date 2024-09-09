@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35201.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CG.Testing.MyLibrary", "CG.Testing.MyLibrary\CG.Testing.MyLibrary.csproj", "{6D9C969A-1B89-44B5-A8FE-6FE17B0D8274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Testing.MyLibrary", "CG.Testing.MyLibrary\CG.Testing.MyLibrary.csproj", "{6D9C969A-1B89-44B5-A8FE-6FE17B0D8274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CG.Testing.MyLibrary.MSTest", "CG.Testing.MyLibrary.MSTest\CG.Testing.MyLibrary.MSTest.csproj", "{F63EA3F3-49F3-455D-95C6-F2B20B9A3AA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Testing.MyLibraryMSTest", "CG.Testing.MyLibraryMSTest\CG.Testing.MyLibraryMSTest.csproj", "{F63EA3F3-49F3-455D-95C6-F2B20B9A3AA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
