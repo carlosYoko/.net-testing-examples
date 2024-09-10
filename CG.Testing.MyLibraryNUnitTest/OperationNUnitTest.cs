@@ -20,8 +20,42 @@ namespace CG.Testing.MyLibrary
             // Assert
             ClassicAssert.AreEqual(50, result);
 
-            //// Assert (usando la sintaxis moderna)
+            // Assert (usando la sintaxis moderna)
             //Assert.That(result, Is.EqualTo(50));
+        }
+
+        [Test]
+        public void IsEven_InputNumberEven_ReturnFalse()
+        {
+            // Arrange
+            Operation op = new Operation();
+            int numTest = 3;
+
+            // Act
+            bool result = op.IsEven(numTest);
+
+            // Assert
+            ClassicAssert.IsFalse(result);
+
+            // Assert (usando la sintaxis moderna)
+            Assert.That(result, Is.EqualTo(false));
+        }
+
+        [Test]
+        public void IsEven_InputNumberEven_ReturnTrue()
+        {
+            // Arrange
+            Operation op = new Operation();
+            int numTest = 2;
+
+            // Act
+            bool result = op.IsEven(numTest);
+
+            // Assert
+            ClassicAssert.IsTrue(result);
+
+            // Assert (usando la sintaxis moderna)
+            Assert.That(result, Is.EqualTo(true));
         }
     }
 }
