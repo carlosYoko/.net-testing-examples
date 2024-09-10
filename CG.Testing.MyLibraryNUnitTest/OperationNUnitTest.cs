@@ -43,6 +43,8 @@ namespace CG.Testing.MyLibrary
 
         [Test]
         [TestCase(4)]
+        [TestCase(6)]
+        [TestCase(8)]
         public void IsEven_InputNumberEven_ReturnTrue(int numTest)
         {
             // Arrange
