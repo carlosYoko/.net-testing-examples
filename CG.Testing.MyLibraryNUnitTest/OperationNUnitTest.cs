@@ -71,5 +71,24 @@ namespace CG.Testing.MyLibrary
             // Assert (usando la sintaxis moderna)
             Assert.That(result, Is.EqualTo(true));
         }
+
+        [Test]
+        [TestCase(2.2, 1.2)]
+        [TestCase(2.23, 1.24)]
+        public void AddDecimal_InputTwoNumbers_GetCorrectValue(double numTest1, double numTest2)
+        {
+            // Arrange
+            Operation op = new Operation();
+
+            // Acts
+            double result = op.AddDecimal(numTest1, numTest2);
+
+            // Assert
+            ClassicAssert.AreEqual(3.4, result, 0.1);
+
+            // Assert (usando la sintaxis moderna)
+            Assert.That(result, Is.EqualTo(3.4).Within(0.1));
+        }
+
     }
 }

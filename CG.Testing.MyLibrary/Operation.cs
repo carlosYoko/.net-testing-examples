@@ -5,5 +5,7 @@
         public int AddNumbers(int a, int b) => a + b;
 
         public bool IsEven(int a) => a % 2 == 0;
+
+        public double AddDecimal(double a, double b) => a + b;
     }
 }
