@@ -42,6 +42,18 @@ namespace CG.Testing.MyLibrary
         }
 
         [Test]
+        [TestCase(3, ExpectedResult = false)]
+        [TestCase(5, ExpectedResult = false)]
+        public bool IsEven_InputNumberEven_ReturnFalse_With_ExpectedResult(int numTest)
+        {
+            // Arrange
+            Operation op = new Operation();
+
+            // Assert
+            return op.IsEven(numTest);
+        }
+
+        [Test]
         [TestCase(4)]
         [TestCase(6)]
         [TestCase(8)]
