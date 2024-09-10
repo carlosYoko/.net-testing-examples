@@ -21,7 +21,7 @@ namespace CG.Testing.MyLibrary
             ClassicAssert.AreEqual(50, result);
 
             // Assert (usando la sintaxis moderna)
-            //Assert.That(result, Is.EqualTo(50));
+            Assert.That(result, Is.EqualTo(50));
         }
 
         [Test]
@@ -42,11 +42,11 @@ namespace CG.Testing.MyLibrary
         }
 
         [Test]
-        public void IsEven_InputNumberEven_ReturnTrue()
+        [TestCase(4)]
+        public void IsEven_InputNumberEven_ReturnTrue(int numTest)
         {
             // Arrange
             Operation op = new Operation();
-            int numTest = 2;
 
             // Act
             bool result = op.IsEven(numTest);
