@@ -13,6 +13,7 @@
 
         public bool Deposit(int amount)
         {
+            _logger.Message($"Depositando la cantidad: {amount}");
             Balance += amount;
             return true;
         }
@@ -21,7 +22,6 @@
         {
             if (amount < Balance)
             {
-                _logger.Message($"Depositando la cantidad: {amount}");
                 Balance -= amount;
                 return true;
             };
