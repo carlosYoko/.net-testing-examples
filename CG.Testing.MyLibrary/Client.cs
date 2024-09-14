@@ -7,6 +7,11 @@
 
         public string CreateFullName(string name, string surname)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("El nombre está en blanco");
+            }
+
             ClientName = name + " " + surname;
             Discount = 30;
 
