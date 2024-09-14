@@ -6,6 +6,8 @@
         bool LogDatabase(string message);
         bool LogBalanceAfterRetire(int balanceAfterRetire);
         string MessageWithReturnStr(string message);
+        bool MessageWithOutParameterReturnBool(string str, out string outPutStr);
+        bool MessageWithObjectRefReturnBool(ref IClient client);
     }
 
     public class LoggerGeneral : ILoggerGeneral
@@ -33,6 +35,17 @@
             Console.WriteLine(message);
         }
 
+        public bool MessageWithObjectRefReturnBool(ref IClient client)
+        {
+            return true;
+        }
+
+        public bool MessageWithOutParameterReturnBool(string str, out string outPutStr)
+        {
+            outPutStr = "Hola" + str;
+            return true;
+        }
+
         public string MessageWithReturnStr(string message)
         {
             Console.WriteLine(message);
@@ -54,6 +67,17 @@
 
         public void Message(string message)
         { }
+
+        public bool MessageWithObjectRefReturnBool(ref IClient client)
+        {
+            return true;
+        }
+
+        public bool MessageWithOutParameterReturnBool(string str, out string outPutStr)
+        {
+            outPutStr = "";
+            return true;
+        }
 
         public string MessageWithReturnStr(string message)
         {

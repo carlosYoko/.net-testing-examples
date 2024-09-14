@@ -97,5 +97,39 @@ namespace CG.Testing.MyLibrary
             // Assert
             Assert.That(result, Is.EqualTo(textTest));
         }
+
+        [Test]
+        public void BankAccountLoggerGeneral_LogMockingOutPut_ReturnsTrue()
+        {
+            // Arrange
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            string textTest = "hola";
+            loggerGeneralMock.Setup(s => s.MessageWithOutParameterReturnBool(It.IsAny<string>(), out textTest)).Returns(true);
+
+            // Act
+            string outParameter = "";
+            var result = loggerGeneralMock.Object.MessageWithOutParameterReturnBool("Carlos", out outParameter);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void BankAccountLoggerGeneral_LogMockingObjectRef_ReturnsTrue()
+        {
+            // Arrange
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            IClient client = new Client();
+            IClient clientUnused = new Client();
+            loggerGeneralMock.Setup(s => s.MessageWithObjectRefReturnBool(ref client)).Returns(true);
+
+            // Act
+            var resultClient = loggerGeneralMock.Object.MessageWithObjectRefReturnBool(ref client);
+            var resultClientUnused = loggerGeneralMock.Object.MessageWithObjectRefReturnBool(ref clientUnused);
+
+            // Assert
+            Assert.That(resultClient, Is.EqualTo(true));
+            Assert.That(resultClientUnused, Is.EqualTo(false));
+        }
     }
 }
