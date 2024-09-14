@@ -131,5 +131,25 @@ namespace CG.Testing.MyLibrary
             Assert.That(resultClient, Is.EqualTo(true));
             Assert.That(resultClientUnused, Is.EqualTo(false));
         }
+
+        [Test]
+        public void BankAccountLoggerGeneral_LogMockingPropertiesPriorityType_ReturnsTrue()
+        {
+            // Arrange
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            loggerGeneralMock.Setup(s => s.TypeLogger).Returns("warning");
+
+            //loggerGeneralMock.Setup(s => s.PriorityLogger).Returns(10);
+            loggerGeneralMock.SetupAllProperties();
+            loggerGeneralMock.Object.PriorityLogger = 10;
+
+            // Act
+            var typeLogger = loggerGeneralMock.Object.TypeLogger;
+            var priorityLogger = loggerGeneralMock.Object.PriorityLogger;
+
+            // Assert
+            Assert.That(typeLogger, Is.EqualTo("warning"));
+            Assert.That(priorityLogger, Is.EqualTo(10));
+        }
     }
 }

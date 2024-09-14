@@ -2,6 +2,8 @@
 {
     public interface ILoggerGeneral
     {
+        int PriorityLogger { get; set; }
+        string TypeLogger { get; set; }
         void Message(string message);
         bool LogDatabase(string message);
         bool LogBalanceAfterRetire(int balanceAfterRetire);
@@ -12,6 +14,9 @@
 
     public class LoggerGeneral : ILoggerGeneral
     {
+        public int PriorityLogger { get; set; }
+        public string TypeLogger { get; set; }
+
         public bool LogBalanceAfterRetire(int balanceAfterRetire)
         {
             if (balanceAfterRetire >= 0)
@@ -55,6 +60,9 @@
 
     public class LoggerFake : ILoggerGeneral
     {
+        public int PriorityLogger { get; set; }
+        public string TypeLogger { get; set; }
+
         public bool LogBalanceAfterRetire(int balanceAfterRetire)
         {
             return false;
