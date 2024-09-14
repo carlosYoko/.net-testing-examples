@@ -80,5 +80,31 @@ namespace CG.Testing.MyLibrary
             Assert.That(exceptionDetail!.Message, Is.EqualTo("El nombre está en blanco"));
             Assert.That(exceptionDetail, Is.InstanceOf<ArgumentException>());
         }
+
+        [Test]
+        public void GetClientDetail_CreateClientWithLessThan500TotalOrder_ReturnsBasicClient()
+        {
+            // Arrange
+            _client.OrderTotal = 150;
+
+            // Act
+            var result = _client.GetClientDetail();
+
+            // Assert
+            Assert.That(result, Is.TypeOf<BasicClient>());
+        }
+
+        [Test]
+        public void GetClientDetail_CreateClientWithGreatherThan500TotalOrder_ReturnsPremiumClient()
+        {
+            // Arrange
+            _client.OrderTotal = 650;
+
+            // Act
+            var result = _client.GetClientDetail();
+
+            // Assert
+            Assert.That(result, Is.TypeOf<PremiumClient>());
+        }
     }
 }
