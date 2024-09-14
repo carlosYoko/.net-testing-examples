@@ -20,13 +20,14 @@
 
         public bool Retire(int amount)
         {
-            if (amount < Balance)
+            if (amount <= Balance)
             {
+                _logger.LogDatabase($"Cantidad a retirar {amount.ToString()}");
                 Balance -= amount;
-                return true;
+                return _logger.LogBalanceAfterRetire(amount);
             };
 
-            return false;
+            return _logger.LogBalanceAfterRetire(Balance - amount);
         }
 
         public int GetBalance()
