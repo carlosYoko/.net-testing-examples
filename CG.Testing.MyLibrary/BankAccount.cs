@@ -3,10 +3,12 @@
     public class BankAccount
     {
         public int Balance { get; set; }
+        private readonly ILoggerGeneral _logger;
 
-        public BankAccount()
+        public BankAccount(ILoggerGeneral loggerGeneral)
         {
             Balance = 0;
+            _logger = loggerGeneral;
         }
 
         public bool Deposit(int amount)
@@ -19,6 +21,7 @@
         {
             if (amount < Balance)
             {
+                _logger.Message($"Depositando la cantidad: {amount}");
                 Balance -= amount;
                 return true;
             };
