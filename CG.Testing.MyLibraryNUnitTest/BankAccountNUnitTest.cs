@@ -151,5 +151,20 @@ namespace CG.Testing.MyLibrary
             Assert.That(typeLogger, Is.EqualTo("warning"));
             Assert.That(priorityLogger, Is.EqualTo(10));
         }
+
+        [Test]
+        public void BankAccountLoggerGeneral_LogMockingCallback_ReturnsTrue()
+        {
+            // Arrange
+            string textTemporal = "Hello";
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            loggerGeneralMock.Setup(s => s.LogDatabase(It.IsAny<string>())).Returns(true).Callback<string>(param => textTemporal += param);
+
+            // Act
+            loggerGeneralMock.Object.LogDatabase("World");
+
+            // Assert
+            Assert.That(textTemporal, Is.EqualTo("HelloWorld"));
+        }
     }
 }
