@@ -80,7 +80,7 @@ namespace CG.Testing.MyLibrary
             // Arrange
             Operation op = new Operation();
 
-            // Acts
+            // Act
             double result = op.AddDecimal(numTest1, numTest2);
 
             // Assert
@@ -88,6 +88,20 @@ namespace CG.Testing.MyLibrary
 
             // Assert (usando la sintaxis moderna)
             Assert.That(result, Is.EqualTo(3.4).Within(0.1));
+        }
+
+        [Test]
+        public void GetListOddNumbers_InputMaxMinIntervals_ReturnsOddList()
+        {
+            // Arrange
+            Operation op = new Operation();
+            List<int> expectedList = new List<int>() { 5, 7, 9 };
+
+            // Act
+            List<int> result = op.GetListOddNumbers(5, 10);
+
+            // Assert
+            Assert.That(result, Is.EquivalentTo(expectedList));
         }
 
     }
