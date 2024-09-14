@@ -1,10 +1,27 @@
 ﻿namespace CG.Testing.MyLibrary
 {
-    public class Client
+    public interface IClient
+    {
+        string ClientName { get; set; }
+        int OrderTotal { get; set; }
+        int Discount { get; set; }
+        bool IsPremium { get; set; }
+        string CreateFullName(string name, string surname);
+        TypeClient GetClientDetail();
+    }
+
+    public class Client : IClient
     {
         public string ClientName { get; set; }
         public int OrderTotal { get; set; }
-        public int Discount = 10;
+        public int Discount { get; set; }
+        public bool IsPremium { get; set; }
+
+        public Client()
+        {
+            Discount = 10;
+            IsPremium = false;
+        }
 
         public string CreateFullName(string name, string surname)
         {
