@@ -82,5 +82,20 @@ namespace CG.Testing.MyLibrary
             // Assert
             Assert.That(result, Is.EqualTo(false));
         }
+
+        [Test]
+        public void BankAccountLoggerGeneral_LogMocking_ReturnsTrue()
+        {
+            // Arrange
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            string textTest = "hello world";
+            loggerGeneralMock.Setup(s => s.MessageWithReturnStr(It.IsAny<string>())).Returns<string>(str => str.ToLower());
+
+            // Act
+            var result = loggerGeneralMock.Object.MessageWithReturnStr("Hello World");
+
+            // Assert
+            Assert.That(result, Is.EqualTo(textTest));
+        }
     }
 }
