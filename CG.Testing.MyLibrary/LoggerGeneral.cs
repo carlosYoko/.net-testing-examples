@@ -37,12 +37,12 @@
     {
         public bool LogBalanceAfterRetire(int balanceAfterRetire)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool LogDatabase(string message)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public void Message(string message)
