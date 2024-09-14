@@ -137,10 +137,10 @@ namespace CG.Testing.MyLibrary
         {
             // Arrange
             var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            loggerGeneralMock.SetupAllProperties();
             loggerGeneralMock.Setup(s => s.TypeLogger).Returns("warning");
 
             //loggerGeneralMock.Setup(s => s.PriorityLogger).Returns(10);
-            loggerGeneralMock.SetupAllProperties();
             loggerGeneralMock.Object.PriorityLogger = 10;
 
             // Act
@@ -165,6 +165,25 @@ namespace CG.Testing.MyLibrary
 
             // Assert
             Assert.That(textTemporal, Is.EqualTo("HelloWorld"));
+        }
+
+        [Test]
+        public void BankAccountLogger_VerifyExamples()
+        {
+            // Arrange
+            var loggerGeneralMock = new Mock<ILoggerGeneral>();
+            BankAccount bankAccount = new BankAccount(loggerGeneralMock.Object);
+
+            // Act
+            bankAccount.Deposit(100);
+
+            // Assert
+            Assert.That(bankAccount.GetBalance(), Is.EqualTo(100));
+
+            loggerGeneralMock.Verify(v => v.Message(It.IsAny<string>()), Times.Exactly(3));
+            loggerGeneralMock.Verify(v => v.Message("Otro texto"), Times.AtLeastOnce);
+            loggerGeneralMock.VerifySet(v => v.PriorityLogger = It.IsAny<int>(), Times.Once);
+            loggerGeneralMock.VerifyGet(v => v.PriorityLogger, Times.Once);
         }
     }
 }
