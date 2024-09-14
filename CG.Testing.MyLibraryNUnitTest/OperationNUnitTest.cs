@@ -102,6 +102,12 @@ namespace CG.Testing.MyLibrary
 
             // Assert
             Assert.That(result, Is.EquivalentTo(expectedList));
+            Assert.That(result, Does.Contain(7));
+            Assert.That(result, Has.No.Member(13));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result.Count(), Is.EqualTo(3));
+            Assert.That(result, Is.Ordered.Ascending);
+            Assert.That(result, Is.Unique);
         }
 
     }

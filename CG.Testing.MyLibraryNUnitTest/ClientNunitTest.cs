@@ -39,5 +39,18 @@ namespace CG.Testing.MyLibrary
             // Assert
             Assert.That(_client.ClientName, Is.EqualTo(null));
         }
+
+        [Test]
+        public void DiscountEvaluation_DefaultClient_ReturnsDiscountInterval()
+        {
+            // Arrange
+
+            // Act
+            int discount = _client.Discount;
+
+            // Assert
+            Assert.That(discount, Is.InRange(5, 24));
+        }
+
     }
 }
