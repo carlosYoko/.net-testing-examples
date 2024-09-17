@@ -1,108 +1,104 @@
-﻿//namespace CG.Testing.MyLibrary
-//{
-//    [TestFixture]
-//    public class ClientXunitTest
-//    {
-//        private Client _client;
+﻿using Xunit;
 
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            _client = new Client();
-//        }
+namespace CG.Testing.MyLibrary
+{
+    public class ClientXunitTest
+    {
+        private Client _client;
 
-//        [Test]
-//        public void CreateFullName_InputNameSurname_ReturnFUllName()
-//        {
-//            // Arrange
+        public ClientXunitTest()
+        {
+            _client = new Client();
+        }
 
-//            // Act
-//            _client.CreateFullName("Carlos", "Gimenez");
+        [Fact]
+        public void CreateFullName_InputNameSurname_ReturnFUllName()
+        {
+            // Arrange
 
-//            // Asert
-//            Assert.Multiple(() =>
-//            {
-//                Assert.That(_client.ClientName, Is.EqualTo("Carlos Gimenez"));
-//                Assert.That(_client.ClientName, Does.Contain("Gimenez"));
-//                Assert.That(_client.ClientName, Does.Contain("carlos").IgnoreCase);
-//                Assert.That(_client.ClientName, Does.StartWith("Ca"));
-//                Assert.That(_client.ClientName, Does.EndWith("ez"));
-//            });
-//        }
+            // Act
+            _client.CreateFullName("Carlos", "Gimenez");
 
-//        [Test]
-//        public void ClientName_NoValues_ReturnsNull()
-//        {
-//            // Arrange
+            // Asert
+            Assert.Equal("Carlos Gimenez", _client.ClientName);
+            Assert.Contains("Gimenez", _client.ClientName);
+            Assert.StartsWith("Ca", _client.ClientName);
+            Assert.EndsWith("ez", _client.ClientName);
+        }
 
-//            // Act
+        [Fact]
+        public void ClientName_NoValues_ReturnsNull()
+        {
+            // Arrange
 
-//            // Assert
-//            Assert.That(_client.ClientName, Is.EqualTo(null));
-//        }
+            // Act
 
-//        [Test]
-//        public void DiscountEvaluation_DefaultClient_ReturnsDiscountInterval()
-//        {
-//            // Arrange
+            // Assert
+            Assert.Null(_client.ClientName);
+        }
 
-//            // Act
-//            int discount = _client.Discount;
+        [Fact]
+        public void DiscountEvaluation_DefaultClient_ReturnsDiscountInterval()
+        {
+            // Arrange
 
-//            // Assert
-//            Assert.That(discount, Is.InRange(5, 24));
-//        }
+            // Act
+            int discount = _client.Discount;
 
-//        [Test]
-//        public void CreateFullName_InputName_ReturnsNotNull()
-//        {
-//            // Arrange
+            // Assert
+            Assert.InRange(discount, 5, 24);
+        }
 
-//            // Act
-//            _client.CreateFullName("Carlos", "");
+        [Fact]
+        public void CreateFullName_InputName_ReturnsNotNull()
+        {
+            // Arrange
 
-//            // Assert
-//            Assert.That(_client.ClientName, Is.Not.Null);
-//            Assert.That(_client.ClientName, Is.Not.Empty);
-//        }
+            // Act
+            _client.CreateFullName("Carlos", "");
 
-//        [Test]
-//        public void CreateFullName_InputNameBlank_ThrowsException()
-//        {
-//            // Arrange
+            // Assert
+            Assert.NotNull(_client.ClientName);
+            Assert.NotEmpty(_client.ClientName);
+            Assert.False(string.IsNullOrEmpty(_client.ClientName));
+        }
 
-//            // Act
-//            var exceptionDetail = Assert.Throws<ArgumentException>(() => _client.CreateFullName("", "Giménez"));
+        [Fact]
+        public void CreateFullName_InputNameBlank_ThrowsException()
+        {
+            // Arrange
 
-//            // Assert
-//            Assert.That(exceptionDetail!.Message, Is.EqualTo("El nombre está en blanco"));
-//            Assert.That(exceptionDetail, Is.InstanceOf<ArgumentException>());
-//        }
+            // Act
+            var exceptionDetail = Assert.Throws<ArgumentException>(() => _client.CreateFullName("", "Giménez"));
 
-//        [Test]
-//        public void GetClientDetail_CreateClientWithLessThan500TotalOrder_ReturnsBasicClient()
-//        {
-//            // Arrange
-//            _client.OrderTotal = 150;
+            // Assert
+            Assert.Equal("El nombre está en blanco", exceptionDetail!.Message);
+        }
 
-//            // Act
-//            var result = _client.GetClientDetail();
+        [Fact]
+        public void GetClientDetail_CreateClientWithLessThan500TotalOrder_ReturnsBasicClient()
+        {
+            // Arrange
+            _client.OrderTotal = 150;
 
-//            // Assert
-//            Assert.That(result, Is.TypeOf<BasicClient>());
-//        }
+            // Act
+            var result = _client.GetClientDetail();
 
-//        [Test]
-//        public void GetClientDetail_CreateClientWithGreatherThan500TotalOrder_ReturnsPremiumClient()
-//        {
-//            // Arrange
-//            _client.OrderTotal = 650;
+            // Assert
+            Assert.IsType<BasicClient>(result);
+        }
 
-//            // Act
-//            var result = _client.GetClientDetail();
+        [Fact]
+        public void GetClientDetail_CreateClientWithGreatherThan500TotalOrder_ReturnsPremiumClient()
+        {
+            // Arrange
+            _client.OrderTotal = 650;
 
-//            // Assert
-//            Assert.That(result, Is.TypeOf<PremiumClient>());
-//        }
-//    }
-//}
+            // Act
+            var result = _client.GetClientDetail();
+
+            // Assert
+            Assert.IsType<PremiumClient>(result);
+        }
+    }
+}
