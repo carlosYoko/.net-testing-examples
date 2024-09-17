@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CG.Testing.MyLibrary\CG.Testing.MyLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

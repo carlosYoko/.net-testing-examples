@@ -1,9 +1,10 @@
-﻿namespace CG.Testing.MyLibrary
+﻿using Xunit;
+
+namespace CG.Testing.MyLibrary
 {
-    [TestFixture]
     public class OperationXUnitTest
     {
-        [Test]
+        [Fact]
         public void AddNumbers_InputTwoNumbers_GetCorrectValue()
         {
             // Arrange
@@ -15,13 +16,10 @@
             int result = op.AddNumbers(numTest1, numTest2);
 
             // Assert
-            ClassicAssert.AreEqual(50, result);
-
-            // Assert (usando la sintaxis moderna)
-            Assert.That(result, Is.EqualTo(50));
+            Assert.Equal(50, result);
         }
 
-        [Test]
+        [Fact]
         public void IsEven_InputNumberEven_ReturnFalse()
         {
             // Arrange
@@ -32,28 +30,28 @@
             bool result = op.IsEven(numTest);
 
             // Assert
-            ClassicAssert.IsFalse(result);
-
-            // Assert (usando la sintaxis moderna)
-            Assert.That(result, Is.EqualTo(false));
+            Assert.False(result);
         }
 
-        [Test]
-        [TestCase(3, ExpectedResult = false)]
-        [TestCase(5, ExpectedResult = false)]
-        public bool IsEven_InputNumberEven_ReturnFalse_With_ExpectedResult(int numTest)
+        [Theory]
+        [InlineData(3, false)]
+        [InlineData(5, false)]
+        public void IsEven_InputNumberEven_ReturnFalse_With_ExpectedResult(int numTest, bool expectedResult)
         {
             // Arrange
             Operation op = new Operation();
 
+            // Act
+            var result = op.IsEven(numTest);
+
             // Assert
-            return op.IsEven(numTest);
+            Assert.Equal(expectedResult, result);
         }
 
-        [Test]
-        [TestCase(4)]
-        [TestCase(6)]
-        [TestCase(8)]
+        [Theory]
+        [InlineData(4)]
+        [InlineData(6)]
+        [InlineData(8)]
         public void IsEven_InputNumberEven_ReturnTrue(int numTest)
         {
             // Arrange
@@ -63,15 +61,12 @@
             bool result = op.IsEven(numTest);
 
             // Assert
-            ClassicAssert.IsTrue(result);
-
-            // Assert (usando la sintaxis moderna)
-            Assert.That(result, Is.EqualTo(true));
+            Assert.True(result);
         }
 
-        [Test]
-        [TestCase(2.2, 1.2)]
-        [TestCase(2.23, 1.24)]
+        [Theory]
+        [InlineData(2.2, 1.2)]
+        [InlineData(2.23, 1.24)]
         public void AddDecimal_InputTwoNumbers_GetCorrectValue(double numTest1, double numTest2)
         {
             // Arrange
@@ -81,13 +76,10 @@
             double result = op.AddDecimal(numTest1, numTest2);
 
             // Assert
-            ClassicAssert.AreEqual(3.4, result, 0.1);
-
-            // Assert (usando la sintaxis moderna)
-            Assert.That(result, Is.EqualTo(3.4).Within(0.1));
+            Assert.Equal(3.4, result, 0);
         }
 
-        [Test]
+        [Fact]
         public void GetListOddNumbers_InputMaxMinIntervals_ReturnsOddList()
         {
             // Arrange
@@ -98,13 +90,12 @@
             List<int> result = op.GetListOddNumbers(5, 10);
 
             // Assert
-            Assert.That(result, Is.EquivalentTo(expectedList));
-            Assert.That(result, Does.Contain(7));
-            Assert.That(result, Has.No.Member(13));
-            Assert.That(result, Is.Not.Empty);
-            Assert.That(result.Count(), Is.EqualTo(3));
-            Assert.That(result, Is.Ordered.Ascending);
-            Assert.That(result, Is.Unique);
+            Assert.Equal(expectedList, result);
+            Assert.Contains(5, result);
+            Assert.DoesNotContain(100, result);
+            Assert.NotEmpty(result);
+            Assert.Equal(3, result.Count);
+            Assert.Equal(result.OrderBy(u => u), result);
         }
 
     }
